@@ -45,6 +45,16 @@ date_inclu = pd.DataFrame(data_power.loc[:,'power_consumption'].groupby(data_pow
 for item in date_range:
     sum_by_month = np.sum(date_inclu.loc[item[0]:item[1], ])
     print(str(item) + ': '+str(sum_by_month))
-date_inclu['weekday']= [item.weekday() for item in date_inclu.index]    
 
-vacation_list = [datetime.datetime(2015,1,1)]
+
+time_predict = [3,4,5,6,0,1,2,3,4,5,6,0,1,2,6,6,6,3,0,1,2,3,4,5,6,0,1,2,3,4]
+
+for i in range(7):
+    print(str(i)+':   '+str(np.mean(date_inclu[date_inclu.weekday == i].loc[:,'power_consumption'])))
+
+result = []
+for item in time_predict:
+    result.append(np.mean(date_inclu[date_inclu.weekday == item].loc[:,'power_consumption']))
+
+
+result = pd.DataFrame(result)
